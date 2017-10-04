@@ -69,7 +69,7 @@ public class Main {
         // ###############  RSA  ##################
         // make a key
         KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
-        keyGen.initialize(512);
+        keyGen.initialize(2048);
         KeyPair pair = keyGen.genKeyPair();
 
         // then ecrypt/decerypt using that key
@@ -78,7 +78,7 @@ public class Main {
         System.out.println("RSA: " + decrypted);
 
         // create and verify a signature
-        Signature sig = Signature.getInstance("SHA1withRSA");
+        Signature sig = Signature.getInstance("SHA256withRSA");
         sig.initSign(pair.getPrivate());
         sig.update(plaintext.getBytes());
         byte[] signatureBytes = sig.sign();
