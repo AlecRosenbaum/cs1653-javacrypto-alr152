@@ -9,6 +9,8 @@ import javax.crypto.interfaces.*;
 import javax.crypto.spec.*;
 import java.io.*;
 
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
 public class Main {
 
     // • Input a line of text from the console
@@ -36,6 +38,18 @@ public class Main {
         // – Output how many times faster Blowfish encryption is than AES encryption
 
     public static void main(String args[]) throws NoSuchAlgorithmException, SignatureException, InvalidKeyException {
+        //add at runtime the Bouncy Castle Provider
+        //the provider is available only for this application
+        Security.addProvider(new BouncyCastleProvider());
+ 
+        //BC is the ID for the Bouncy Castle provider;
+        if (Security.getProvider("BC") == null){
+            System.out.println("Bouncy Castle provider is NOT available");
+        }
+        else{
+            System.out.println("Bouncy Castle provider is available");
+        }
+
         System.out.print("Enter some text: ");
         Scanner console = new Scanner(System.in);
         String plaintext = console.nextLine();
